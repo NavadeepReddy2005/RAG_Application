@@ -1,0 +1,11 @@
+Langchain
+Langchain-huggingface
+Langchain-openrouter
+python-dotenv
+langchain-groq
+langchain-chroma
+langchain-community
+langchain-text-splitters
+langchain-classic
+
+sentence-transformers
