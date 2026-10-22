@@ -3,6 +3,7 @@ from .Data_Loader import DataLoader
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from .ReRanking import ReRanker
 
 from dotenv import load_dotenv
 
@@ -18,6 +19,8 @@ class RAG:
         self.Model = ChatGroq(model='openai/gpt-oss-20b')
 
         self.Database = VectorData(collection_name='knowledge',directory='chroma')
+
+        self.reranker = ReRanker()
 
         self.Template = ChatPromptTemplate(
             messages=[
@@ -40,7 +43,7 @@ class RAG:
 
     def invoke(self,query):
 
-        docs = self.Database.similarity_x(query)
+        docs = self.reranker.rank(query)
 
         chain = self.Template | self.Model | self.parser
 

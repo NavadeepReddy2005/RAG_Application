@@ -26,3 +26,9 @@ class VectorData:
     def remove_data(self):
 
         return self.vectordb.delete_collection()
+
+    def as_retriver(self,k=3):
+
+        return self.vectordb.as_retriever(
+            search_kwargs = {'k':k}
+        )
